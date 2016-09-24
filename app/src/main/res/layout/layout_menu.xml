@@ -8,8 +8,10 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar_menu" />
+
     <io.karim.MaterialTabs
-        android:id="@+id/main_tabs"
+        android:id="@+id/menu_tabs"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?attr/colorPrimary"
@@ -17,7 +19,7 @@
         app:mtSameWeightTabs="true" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/main_pager"
+        android:id="@+id/menu_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
