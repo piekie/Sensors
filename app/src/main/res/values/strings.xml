@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Sensors</string>
     <string name="restore_defaults">Restore defaults</string>
+    <string name="menu_button_start">Start</string>
+    <string name="menu_textview_step">Step</string>
+    <string name="menu_textview_angle_inc">Angle Inc.</string>
+    <string name="menu_textview_angle">Angle</string>
+    <string name="menu_textview_size">Size</string>
+    <string name="menu_textview_y">Y</string>
+    <string name="menu_textview_x">X</string>
 </resources>

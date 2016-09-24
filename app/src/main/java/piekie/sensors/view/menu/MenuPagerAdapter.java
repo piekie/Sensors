@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+import piekie.sensors.view.menu.fragment.FirstFragment;
+
 /**
  * Created by piekie (Artem Vasylenko)
  * on 9/24/16
@@ -34,6 +36,8 @@ public class MenuPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if (position == 0) return FirstFragment.newInstance();
+
         return MenuFragment.newInstance(position);
     }
 

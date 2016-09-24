@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <piekie.sensors.view.action.ActionView
+            android:id="@+id/menu_action_example"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:id="@+id/menu_coordinates_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_action_example"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/menu_textview_x" />
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_x"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                app:dsb_max="256"
+                app:dsb_min="-256"
+                app:dsb_value="0" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/menu_textview_y" />
+
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_y"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                app:dsb_max="256"
+                app:dsb_min="-256"
+                app:dsb_value="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menu_block_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_coordinates_block"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/menu_title_size"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/menu_textview_size" />
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:dsb_max="200"
+                app:dsb_min="20" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/menu_block_angle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_block_size"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/menu_textview_angle" />
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="wrap_content">
+
+                <com.github.glomadrian.materialanimatedswitch.MaterialAnimatedSwitch
+                    android:id="@+id/menu_switch_rotate"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="8dp"
+                    app:ball_press_color="@android:color/holo_orange_light"
+                    app:ball_release_color="@android:color/holo_orange_dark"
+                    app:base_press_color="@android:color/holo_blue_light"
+                    app:base_release_color="@android:color/holo_blue_dark"
+                    app:icon_press="@drawable/ic_arrow_back_white_24dp"
+                    app:icon_release="@drawable/ic_restore_page_white_24dp" />
+
+            </RelativeLayout>
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_angle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:dsb_max="360"
+                app:dsb_min="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menu_block_angle_increment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_block_angle">
+
+            <TextView
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/menu_textview_angle_inc" />
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_angle_increment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:dsb_max="180"
+                app:dsb_min="1" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/menu_block_step"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_block_angle_increment">
+
+            <TextView
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/menu_textview_step" />
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_step"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:dsb_max="50"
+                app:dsb_min="5" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/menu_button_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_block_step"
+            android:layout_centerHorizontal="true"
+            android:text="@string/menu_button_start" />
+
+    </RelativeLayout>
+</ScrollView>
