@@ -1,4 +1,4 @@
-package piekie.sensors.view;
+package piekie.sensors.view.action;
 
 import android.content.Intent;
 import android.graphics.Canvas;

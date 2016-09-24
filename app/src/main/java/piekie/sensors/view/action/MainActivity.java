@@ -1,9 +1,7 @@
-package piekie.sensors;
+package piekie.sensors.view.action;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import piekie.sensors.view.ActionView;
 
 public class MainActivity extends AppCompatActivity {
 
