@@ -1,11 +1,9 @@
 package piekie.sensors.view.action;
 
-import android.content.Intent;
 import android.graphics.Canvas;
-import android.support.annotation.Nullable;
 import android.view.SurfaceHolder;
 
-import piekie.sensors.model.Dumbo;
+import piekie.sensors.domain.Scene;
 import piekie.sensors.model.World;
 
 
@@ -21,12 +19,18 @@ public class DrawThread extends Thread {
 
     private World world;
 
-    public DrawThread(SurfaceHolder surfaceHolder) {
+    public DrawThread(SurfaceHolder surfaceHolder, Scene scene) {
         this.surfaceHolder = surfaceHolder;
 
-        world = new World(new Dumbo());
+        if (scene.equals(Scene.TEST_FIRST)) {
+            world = new World(scene);
+        }
 
         prevTime = System.currentTimeMillis();
+    }
+
+    public void push(String key, String value) {
+        world.updateWithValues(key, value);
     }
 
     public void setRunning(boolean run) {

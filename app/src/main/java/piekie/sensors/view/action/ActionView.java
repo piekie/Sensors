@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import piekie.sensors.domain.Scene;
+
 /**
  * Created by piekie (Artem Vasylenko)
  * on 9/23/16
@@ -15,14 +17,30 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
     private DrawThread drawThread;
     private Intent intent;
 
+    private Scene scene;
+
     public ActionView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        getHolder().addCallback(this);
     }
 
     public ActionView(Context context) {
         super(context);
 
         getHolder().addCallback(this);
+    }
+
+
+    public void initialize(Intent intent, Scene scene) {
+        this.intent = intent;
+        this.scene = scene;
+    }
+
+    public void startDrawThread(Scene scene) {
+        drawThread = new DrawThread(getHolder(), scene);
+        drawThread.setRunning(true);
+        drawThread.start();
     }
 
     @Override
@@ -32,9 +50,7 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        drawThread = new DrawThread(getHolder());
-        drawThread.setRunning(true);
-        drawThread.start();
+        startDrawThread(scene);
     }
 
     @Override
@@ -50,6 +66,11 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
             } catch (InterruptedException ignored) {
             }
         }
+    }
 
+    public void push(String key, String value) {
+        if (drawThread != null) {
+            drawThread.push(key, value);
+        }
     }
 }

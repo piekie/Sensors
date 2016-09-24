@@ -32,7 +32,7 @@ public class Brain {
 
     void think() {
         if (isUpdateAllowed()) {
-            //execute some update coordinates functions and so on
+            instance.moving.rotate(Moving.Direction.DEFAULT);
         }
     }
 }

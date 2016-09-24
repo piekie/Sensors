@@ -10,9 +10,9 @@ import piekie.sensors.domain.Point;
 
 class Moving {
 
-    private int step;  //шаг движения
-    private int phi;    // насколько Dumbo вращается. "дискрета"
-    private boolean isRotating;   //вращается ли Дамбо
+    public int step = 100;  //шаг движения
+    public int phi = 1;    // насколько Dumbo вращается. "дискрета"
+    public boolean isRotating;   //вращается ли Дамбо
     private Way movingWay;
     private CircleTrajectory circleTrajectory;
     private Dumbo instance;
@@ -27,7 +27,7 @@ class Moving {
     /**
      * Rotate Dumbo on certain angle (initializing value).
      */
-    private void rotate(Direction direction) {
+    public void rotate(Direction direction) {
         int delta = phi;
 
         if (direction.equals(Direction.LEFT)) {

@@ -16,14 +16,18 @@ public class Dumbo {
     int x;
     int y;
 
-    private Brain brain;
-    private Moving moving;
+    Brain brain;
+    Moving moving;
 
     public Dumbo() {
         brain = new Brain(this);
         moving = new Moving(this);
 
-        size = 100;
+        size = 90;
+    }
+
+    public void setRotating(boolean isRotating) {
+        moving.isRotating = isRotating;
     }
 
     public void update() {
