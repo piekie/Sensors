@@ -16,8 +16,12 @@ class Moving {
     private Way movingWay;
     private CircleTrajectory circleTrajectory;
     private Dumbo instance;
+
     Moving(Dumbo instance) {
         this.instance = instance;
+
+        this.instance.x = 0;
+        this.instance.y = 0;
     }
 
     /**
