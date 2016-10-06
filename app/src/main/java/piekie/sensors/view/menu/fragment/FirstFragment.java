@@ -50,6 +50,16 @@ public class FirstFragment extends Fragment {
 
     @InjectView(R.id.menu_seekbar_y)
     DiscreteSeekBar seekBarY;
+
+    @InjectView(R.id.menu_seekbar_way)
+    DiscreteSeekBar seekBarWay;
+
+    @InjectView(R.id.menu_seekbar_direction)
+    DiscreteSeekBar seekBarDirection;
+
+    @InjectView(R.id.menu_switch_way)
+    MaterialAnimatedSwitch switchWay;
+
     ActionView action;
     private Bundle extras;
 
@@ -69,6 +79,8 @@ public class FirstFragment extends Fragment {
         extras.putInt("angle", getContext().getResources().getInteger(R.integer.default_dumbo_angle));
         extras.putInt("angleInc", getContext().getResources().getInteger(R.integer.default_dumbo_angle_increment));
         extras.putInt("step", getContext().getResources().getInteger(R.integer.default_dumbo_step));
+        extras.putInt("direction", getContext().getResources().getInteger(R.integer.default_dumbo_direction));
+        extras.putInt("way", getContext().getResources().getInteger(R.integer.default_dumbo_way));
     }
 
     @Override
@@ -194,7 +206,44 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        seekBarWay.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                extras.putInt("way", value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+        });
+
+        seekBarDirection.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                action.push("direction", Integer.toString(value));
+                extras.putInt("direction", value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+        });
+
         switchRotate.setOnCheckedChangeListener(b -> action.push("isRotating", Boolean.toString(b)));
+        switchWay.setOnCheckedChangeListener(b -> action.push("isCircle", Boolean.toString(b)));
+
 
         buttonStart.setOnClickListener(v -> {
             Intent i = new Intent(getContext(), MainActivity.class);
@@ -206,18 +255,4 @@ public class FirstFragment extends Fragment {
 
         return rootView;
     }
-
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//
-//        action.pause();
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        action.resume();
-//    }
 }

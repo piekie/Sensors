@@ -8,6 +8,9 @@ package piekie.sensors.model;
 public class Brain {
 
     private final int updatingRatio = 1000;
+    public int way = 0;
+    public int direction = 0;
+    public boolean circle = false;
     private long lastUpdateTimestamp = 0;
     private Dumbo instance;
 

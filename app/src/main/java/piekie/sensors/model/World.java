@@ -85,6 +85,22 @@ public class World {
             dumbo.moving.step = Integer.parseInt(value);
         }
 
+        if (key.equals("way")) {
+            dumbo.brain.way = Integer.parseInt(value);
+        }
+
+        if (key.equals("direction")) {
+            dumbo.brain.direction = Integer.parseInt(value);
+        }
+
+        if (key.equals("isCircle")) {
+            if (value.equals("true")) {
+                dumbo.brain.circle = true;
+            } else {
+                dumbo.brain.circle = false;
+            }
+        }
+
     }
 
     public void draw(Canvas canvas) {
@@ -117,6 +133,15 @@ public class World {
             canvas.drawCircle(canvas.getWidth() / 2 + dumbo.x,
                     canvas.getHeight() / 2 + dumbo.y,
                     dumbo.moving.step, circle);
+
+
+            Paint directionCircle = new Paint(Paint.ANTI_ALIAS_FLAG);
+            directionCircle.setColor(Color.WHITE);
+            directionCircle.setStyle(Paint.Style.FILL);
+
+            canvas.drawCircle(
+                    (float) (canvas.getWidth() / 2 + dumbo.x + (dumbo.moving.step * Math.cos(Math.toRadians(dumbo.brain.direction)))),
+                    (float) (canvas.getHeight() / 2 + dumbo.y + (dumbo.moving.step * Math.sin(Math.toRadians(dumbo.brain.direction)))), 10, directionCircle);
 
 
             Matrix matrix = new Matrix();
