@@ -13,7 +13,7 @@ class Moving {
     public int step = 100;  //шаг движения
     public int phi = 1;    // насколько Dumbo вращается. "дискрета"
     public boolean isRotating;   //вращается ли Дамбо
-    private Way movingWay;
+    private Way movingWay = Way.LINE;
     private CircleTrajectory circleTrajectory;
     private Dumbo instance;
 

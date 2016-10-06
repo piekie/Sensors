@@ -1,5 +1,8 @@
 package piekie.sensors.model;
 
+import piekie.sensors.domain.CircleTrajectory;
+import piekie.sensors.domain.Scene;
+
 /**
  * Created by piekie (Artem Vasylenko)
  * on 9/24/16
@@ -33,9 +36,25 @@ public class Brain {
         } else return false;
     }
 
-    void think() {
+    void think(Scene scene) {
         if (isUpdateAllowed()) {
             instance.moving.rotate(Moving.Direction.DEFAULT);
+
+            if (scene.equals(Scene.FIRST))
+                instance.moving.move(direction);
+        }
+    }
+
+    void initialize() {
+        if (circle) {
+            CircleTrajectory ct = new CircleTrajectory(
+                    instance.x + way * Math.cos(Math.toRadians(direction)),
+                    instance.y + way * Math.sin(Math.toRadians(direction)),
+                    way);
+
+            ct.initialize(instance.x, instance.y);
+
+            instance.moving.setCircleTrajectory(ct);
         }
     }
 }

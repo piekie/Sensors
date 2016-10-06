@@ -3,7 +3,6 @@ package piekie.sensors.model;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Bundle;
 
@@ -59,10 +58,12 @@ public class World {
         dumbo.brain.circle = info.getBoolean("isCircle", false);
         dumbo.brain.direction = info.getInt("direction", res.getInteger(R.integer.default_dumbo_direction));
         dumbo.brain.way = info.getInt("way", res.getInteger(R.integer.default_dumbo_way));
+
+        dumbo.brain.initialize();
     }
 
     public void update() {
-        dumbo.update();
+        dumbo.update(scene);
     }
 
     public void updateWithValues(String key, String value) {
@@ -148,20 +149,24 @@ public class World {
                     (float) (canvas.getWidth() / 2 + dumbo.x + (dumbo.moving.step * Math.cos(Math.toRadians(dumbo.brain.direction)))),
                     (float) (canvas.getHeight() / 2 + dumbo.y + (dumbo.moving.step * Math.sin(Math.toRadians(dumbo.brain.direction)))), 10, directionCircle);
 
+            canvas.save();
 
-            Matrix matrix = new Matrix();
 
-            matrix.setRotate((float) dumbo.angle,
-                    canvas.getWidth() / 2 + dumbo.x,
-                    canvas.getHeight() / 2 + dumbo.x);
-
-            canvas.setMatrix(matrix);
+            canvas.rotate((float) dumbo.angle, canvas.getWidth() / 2 + dumbo.x, canvas.getHeight() / 2 + dumbo.y);
+//            Matrix matrix = new Matrix();
+//
+//            matrix.setRotate((float) dumbo.angle,
+//                    canvas.getWidth() / 2 + dumbo.x,
+//                    canvas.getHeight() / 2 + dumbo.x);
+//
+//            canvas.setMatrix(matrix);
 
             canvas.drawRect(canvas.getWidth() / 2 + dumbo.x - dumbo.size / 2,
                     canvas.getHeight() / 2 + dumbo.y - dumbo.size / 2,
                     canvas.getWidth() / 2 + dumbo.x + dumbo.size / 2,
                     canvas.getHeight() / 2 + dumbo.y + dumbo.size / 2,
                     dumboPaint);
+            canvas.restore();
 
         } else if (scene.equals(Scene.FIRST)) {
             canvas.drawColor(Color.BLACK);
@@ -186,19 +191,16 @@ public class World {
                     dumbo.moving.step, circle);
 
 
-            Matrix matrix = new Matrix();
+            canvas.save();
 
-            matrix.setRotate((float) dumbo.angle,
-                    canvas.getWidth() / 2 + dumbo.x,
-                    canvas.getHeight() / 2 + dumbo.x);
-
-            canvas.setMatrix(matrix);
+            canvas.rotate((float) dumbo.angle, canvas.getWidth() / 2 + dumbo.x, canvas.getHeight() / 2 + dumbo.y);
 
             canvas.drawRect(canvas.getWidth() / 2 + dumbo.x - dumbo.size / 2,
                     canvas.getHeight() / 2 + dumbo.y - dumbo.size / 2,
                     canvas.getWidth() / 2 + dumbo.x + dumbo.size / 2,
                     canvas.getHeight() / 2 + dumbo.y + dumbo.size / 2,
                     dumboPaint);
+            canvas.restore();
         }
     }
 }

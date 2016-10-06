@@ -21,8 +21,7 @@ public class CircleTrajectory {
 
     public double angleInside;
 
-    public boolean initialized() {
-        return amountOfPoints != -1;
+    public CircleTrajectory() {
     }
 
     public CircleTrajectory(double cx, double cy, double radius) {
@@ -31,6 +30,10 @@ public class CircleTrajectory {
         this.radius = radius;
 
         amountOfPoints = -1;
+    }
+
+    public boolean initialized() {
+        return amountOfPoints != -1;
     }
 
     public void initialize(double startX, double startY) {

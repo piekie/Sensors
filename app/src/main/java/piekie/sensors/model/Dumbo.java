@@ -2,6 +2,8 @@ package piekie.sensors.model;
 
 import android.graphics.Color;
 
+import piekie.sensors.domain.Scene;
+
 /**
  * Created by piekie (Artem Vasylenko)
  * on 9/24/16
@@ -30,8 +32,8 @@ public class Dumbo {
         moving.isRotating = isRotating;
     }
 
-    public void update() {
-        brain.think();
+    public void update(Scene scene) {
+        brain.think(scene);
     }
 
     public int getColor() {
@@ -41,4 +43,6 @@ public class Dumbo {
     public double getRotate() {
         return angle;
     }
+
+
 }
