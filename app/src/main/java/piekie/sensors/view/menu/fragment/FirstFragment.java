@@ -1,11 +1,13 @@
 package piekie.sensors.view.menu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.glomadrian.materialanimatedswitch.MaterialAnimatedSwitch;
 
@@ -16,6 +18,7 @@ import butterknife.InjectView;
 import piekie.sensors.R;
 import piekie.sensors.domain.Scene;
 import piekie.sensors.view.action.ActionView;
+import piekie.sensors.view.action.MainActivity;
 
 /**
  * Created by piekie (Artem Vasylenko)
@@ -39,6 +42,17 @@ public class FirstFragment extends Fragment {
     @InjectView(R.id.menu_seekbar_step)
     DiscreteSeekBar seekBarStep;
 
+    @InjectView(R.id.menu_button_start)
+    Button buttonStart;
+
+    @InjectView(R.id.menu_seekbar_x)
+    DiscreteSeekBar seekBarX;
+
+    @InjectView(R.id.menu_seekbar_y)
+    DiscreteSeekBar seekBarY;
+    ActionView action;
+    private Bundle extras;
+
     public static FirstFragment newInstance() {
         return new FirstFragment();
     }
@@ -46,6 +60,15 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        extras = new Bundle();
+
+        extras.putInt("size", getContext().getResources().getInteger(R.integer.default_dumbo_size));
+        extras.putInt("x", getContext().getResources().getInteger(R.integer.default_dumbo_x));
+        extras.putInt("y", getContext().getResources().getInteger(R.integer.default_dumbo_y));
+        extras.putInt("angle", getContext().getResources().getInteger(R.integer.default_dumbo_angle));
+        extras.putInt("angleInc", getContext().getResources().getInteger(R.integer.default_dumbo_angle_increment));
+        extras.putInt("step", getContext().getResources().getInteger(R.integer.default_dumbo_step));
     }
 
     @Override
@@ -56,7 +79,7 @@ public class FirstFragment extends Fragment {
 
         ViewCompat.setElevation(rootView, 50);
 
-        final ActionView action = (ActionView) rootView.findViewById(R.id.menu_action_example);
+        action = (ActionView) rootView.findViewById(R.id.menu_action_example);
         action.initialize(null, Scene.TEST_FIRST);
 
 
@@ -64,6 +87,10 @@ public class FirstFragment extends Fragment {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
                 action.push("size", Integer.toString(value));
+
+                //// TODO: 10/4/16 move next line to "button" block
+
+                extras.putInt("size", value);
             }
 
             @Override
@@ -73,7 +100,6 @@ public class FirstFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
             }
         });
 
@@ -81,6 +107,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
                 action.push("angle", Integer.toString(value));
+
+                extras.putInt("angle", value);
             }
 
             @Override
@@ -98,6 +126,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
                 action.push("angleInc", Integer.toString(value));
+
+                extras.putInt("angleInc", value);
             }
 
             @Override
@@ -115,6 +145,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
                 action.push("step", Integer.toString(value));
+
+                extras.putInt("step", value);
             }
 
             @Override
@@ -128,13 +160,64 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        switchRotate.setOnCheckedChangeListener(new MaterialAnimatedSwitch.OnCheckedChangeListener() {
+        seekBarX.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
-            public void onCheckedChanged(boolean b) {
-                action.push("isRotating", Boolean.toString(b));
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                extras.putInt("x", value);
             }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+        });
+
+        seekBarY.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                extras.putInt("y", value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+        });
+
+        switchRotate.setOnCheckedChangeListener(b -> action.push("isRotating", Boolean.toString(b)));
+
+        buttonStart.setOnClickListener(v -> {
+            Intent i = new Intent(getContext(), MainActivity.class);
+
+            i.putExtra("bundle", extras);
+
+            startActivity(i);
         });
 
         return rootView;
     }
+
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//
+//        action.pause();
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        action.resume();
+//    }
 }

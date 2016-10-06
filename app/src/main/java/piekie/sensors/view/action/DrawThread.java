@@ -1,6 +1,7 @@
 package piekie.sensors.view.action;
 
 import android.graphics.Canvas;
+import android.os.Bundle;
 import android.view.SurfaceHolder;
 
 import piekie.sensors.domain.Scene;
@@ -13,10 +14,10 @@ import piekie.sensors.model.World;
  */
 
 public class DrawThread extends Thread {
+    private static int MAX_FPS = 30;
     private final SurfaceHolder surfaceHolder;
     private boolean runFlag = false;
     private long prevTime;
-
     private World world;
 
     public DrawThread(SurfaceHolder surfaceHolder, Scene scene) {
@@ -24,6 +25,18 @@ public class DrawThread extends Thread {
 
         if (scene.equals(Scene.TEST_FIRST)) {
             world = new World(scene);
+        }
+
+        prevTime = System.currentTimeMillis();
+    }
+
+    public DrawThread(SurfaceHolder surfaceHolder, Scene scene, Bundle info) {
+        this.surfaceHolder = surfaceHolder;
+
+        if (scene.equals(Scene.TEST_FIRST)) {
+            world = new World(scene);
+        } else if (scene.equals(Scene.FIRST)) {
+            world = new World(scene, info);
         }
 
         prevTime = System.currentTimeMillis();
@@ -47,7 +60,7 @@ public class DrawThread extends Thread {
             long now = System.currentTimeMillis();
             long elapsedTime = now - prevTime;
 
-            if (elapsedTime > 30) {
+            if (elapsedTime > MAX_FPS) {
 
                 /* Pre-Drawing block */
 
@@ -62,7 +75,9 @@ public class DrawThread extends Thread {
                 synchronized (surfaceHolder) {
                     /* Drawing block */
 
-                    world.draw(canvas);
+                    if (canvas != null) {
+                        world.draw(canvas);
+                    }
                 }
             } finally {
                 if (canvas != null) {

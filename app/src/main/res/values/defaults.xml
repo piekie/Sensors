@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="default_dumbo_size">90</integer>
+    <integer name="default_dumbo_y">0</integer>
+    <integer name="default_dumbo_angle">0</integer>
+    <integer name="default_dumbo_step">100</integer>
+    <integer name="menu_seekbar_step_max">200</integer>
+    <integer name="menu_seekbar_step_min">10</integer>
+    <integer name="default_dumbo_x">0</integer>
+    <integer name="menu_seekbar_x_max">256</integer>
+    <integer name="menu_seekbar_x_min">-256</integer>
+    <integer name="default_dumbo_angle_increment">0</integer>
+</resources>

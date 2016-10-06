@@ -39,9 +39,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
-                app:dsb_max="256"
-                app:dsb_min="-256"
-                app:dsb_value="0" />
+                app:dsb_max="@integer/menu_seekbar_x_max"
+                app:dsb_min="@integer/menu_seekbar_x_min"
+                app:dsb_value="@integer/default_dumbo_x" />
 
             <TextView
                 android:layout_width="0dp"
@@ -57,9 +57,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
-                app:dsb_max="256"
-                app:dsb_min="-256"
-                app:dsb_value="0" />
+                app:dsb_max="@integer/menu_seekbar_y_max"
+                app:dsb_min="@integer/menu_seekbar_y_min"
+                app:dsb_value="@integer/default_dumbo_y" />
 
         </LinearLayout>
 
@@ -84,9 +84,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:dsb_max="200"
-                app:dsb_min="20"
-                app:dsb_value="90" />
+                app:dsb_max="@integer/menu_seekbar_size_max"
+                app:dsb_min="@integer/menu_seekbar_size_min"
+                app:dsb_value="@integer/default_dumbo_size" />
 
         </LinearLayout>
 
@@ -130,8 +130,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:dsb_max="360"
-                app:dsb_min="0" />
+                app:dsb_max="@integer/menu_seekbar_angle_max"
+                app:dsb_min="@integer/menu_seekbar_angle_min"
+                app:dsb_value="@integer/default_dumbo_angle" />
 
         </LinearLayout>
 
@@ -154,8 +155,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:dsb_max="180"
-                app:dsb_min="1" />
+                app:dsb_max="@integer/menu_seekbar_angle_increment_max"
+                app:dsb_min="@integer/menu_seekbar_angle_increment_min"
+                app:dsb_value="@integer/default_dumbo_angle_increment" />
         </LinearLayout>
 
 
@@ -178,9 +180,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:dsb_max="200"
-                app:dsb_min="10"
-                app:dsb_value="100" />
+                app:dsb_max="@integer/menu_seekbar_step_max"
+                app:dsb_min="@integer/menu_seekbar_step_min"
+                app:dsb_value="@integer/default_dumbo_step" />
         </LinearLayout>
 
         <Button
