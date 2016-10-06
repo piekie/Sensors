@@ -241,8 +241,15 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        switchRotate.setOnCheckedChangeListener(b -> action.push("isRotating", Boolean.toString(b)));
-        switchWay.setOnCheckedChangeListener(b -> action.push("isCircle", Boolean.toString(b)));
+        switchRotate.setOnCheckedChangeListener(b -> {
+            action.push("isRotating", Boolean.toString(b));
+            extras.putBoolean("isRotating", b);
+        });
+
+        switchWay.setOnCheckedChangeListener(b -> {
+            action.push("isCircle", Boolean.toString(b));
+            extras.putBoolean("isCircle", b);
+        });
 
 
         buttonStart.setOnClickListener(v -> {

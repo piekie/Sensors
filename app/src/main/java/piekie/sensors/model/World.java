@@ -39,7 +39,11 @@ public class World {
         this.scene = scene;
         this.dumbo = new Dumbo();
 
-//        if (scene.equals(Scene.TEST_FIRST)) {
+        dumboPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        dumboPaint.setColor(dumbo.getColor());
+        dumboPaint.setStyle(Paint.Style.FILL);
+
+
         Resources res = App.getContext().getResources();
 
         dumbo.x = info.getInt("x", res.getInteger(R.integer.default_dumbo_x));
@@ -47,13 +51,14 @@ public class World {
         dumbo.size = info.getInt("size", res.getInteger(R.integer.default_dumbo_size));
         dumbo.moving.step = info.getInt("step", res.getInteger(R.integer.default_dumbo_step));
         dumbo.moving.phi = info.getInt("angleInc", res.getInteger(R.integer.default_dumbo_angle_increment));
+        dumbo.moving.isRotating = info.getBoolean("isRotating", false);
 
         dumbo.angle = info.getInt("angle", res.getInteger(R.integer.default_dumbo_angle));
 
-            dumboPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            dumboPaint.setColor(dumbo.getColor());
-            dumboPaint.setStyle(Paint.Style.FILL);
-//        }
+
+        dumbo.brain.circle = info.getBoolean("isCircle", false);
+        dumbo.brain.direction = info.getInt("direction", res.getInteger(R.integer.default_dumbo_direction));
+        dumbo.brain.way = info.getInt("way", res.getInteger(R.integer.default_dumbo_way));
     }
 
     public void update() {
