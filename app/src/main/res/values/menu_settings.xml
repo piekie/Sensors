@@ -9,4 +9,8 @@
     <integer name="menu_seekbar_y_min">-256</integer>
     <integer name="menu_seekbar_size_max">200</integer>
     <integer name="menu_seekbar_size_min">20</integer>
+    <integer name="menu_seekbar_way_max">100</integer>
+    <integer name="menu_seekbar_way_min">500</integer>
+    <integer name="menu_seekbar_direction_max">360</integer>
+    <integer name="menu_seekbar_direction_min">0</integer>
 </resources>

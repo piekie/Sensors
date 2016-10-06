@@ -185,11 +185,78 @@
                 app:dsb_value="@integer/default_dumbo_step" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/menu_block_way"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_block_step">
+
+            <TextView
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/menu_textview_way" />
+
+            <RelativeLayout
+                android:layout_width="64dp"
+                android:layout_height="wrap_content">
+
+                <com.github.glomadrian.materialanimatedswitch.MaterialAnimatedSwitch
+                    android:id="@+id/menu_switch_way"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="8dp"
+                    app:ball_press_color="@android:color/holo_orange_light"
+                    app:ball_release_color="@android:color/holo_orange_dark"
+                    app:base_press_color="@android:color/holo_blue_light"
+                    app:base_release_color="@android:color/holo_blue_dark"
+                    app:icon_press="@drawable/ic_arrow_back_white_24dp"
+                    app:icon_release="@drawable/ic_restore_page_white_24dp" />
+
+            </RelativeLayout>
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_way"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:dsb_max="@integer/menu_seekbar_way_max"
+                app:dsb_min="@integer/menu_seekbar_way_min"
+                app:dsb_value="@integer/default_dumbo_way" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menu_block_direction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_block_way">
+
+            <TextView
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/menu_textview_direction" />
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/menu_seekbar_direction"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:dsb_max="@integer/menu_seekbar_direction_max"
+                app:dsb_min="@integer/menu_seekbar_direction_min"
+                app:dsb_value="@integer/default_dumbo_direction" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/menu_button_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/menu_block_step"
+            android:layout_below="@id/menu_block_direction"
             android:layout_centerHorizontal="true"
             android:text="@string/menu_button_start" />
 

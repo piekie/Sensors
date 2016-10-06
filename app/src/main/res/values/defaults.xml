@@ -10,4 +10,6 @@
     <integer name="menu_seekbar_x_max">256</integer>
     <integer name="menu_seekbar_x_min">-256</integer>
     <integer name="default_dumbo_angle_increment">0</integer>
+    <integer name="default_dumbo_way">350</integer>
+    <integer name="default_dumbo_direction">0</integer>
 </resources>
