@@ -300,7 +300,7 @@ public class World {
 
                 canvas.save();
 
-                canvas.rotate((float) dumbo.angle, canvas.getWidth() / 2 + dumbo.x, canvas.getHeight() / 2 + dumbo.y);
+                canvas.rotate((float) dumbo.angle, dumbo.x, dumbo.y);
 
                 canvas.drawRect(dumbo.x,
                         dumbo.y - dumbo.size / 2,
