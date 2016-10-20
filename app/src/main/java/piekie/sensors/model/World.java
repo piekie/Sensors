@@ -18,7 +18,10 @@ import piekie.sensors.domain.Scene;
 public class World {
 
     private Dumbo dumbo;
+    private Dumbo block;
+
     private Paint dumboPaint;
+    private Paint blockPaint;
 
     private Scene scene;
 
@@ -55,6 +58,16 @@ public class World {
             dumbo.y = -1;
 
             status = 0;
+
+            block = new Dumbo();
+            block.x = -1;
+            block.y = -1;
+
+            block.size = res.getInteger(R.integer.default_dumbo_size);
+
+            blockPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            blockPaint.setColor(Color.RED);
+            blockPaint.setStyle(Paint.Style.FILL);
         }
 
         dumbo.size = info.getInt("size", res.getInteger(R.integer.default_dumbo_size));
@@ -73,7 +86,13 @@ public class World {
     }
 
     public void update() {
-        dumbo.update(scene);
+        if (scene.equals(Scene.SECOND)) {
+            if (status >= 3) {
+                dumbo.update(scene);
+            }
+        } else {
+            dumbo.update(scene);
+        }
     }
 
     public void updateWithValues(String key, String value) {
@@ -119,7 +138,7 @@ public class World {
             if (status == 0) {
                 dumbo.x = (int) x;
             } else if (status == 1) {
-
+                block.x = (int) x;
             }
         }
 
@@ -129,7 +148,7 @@ public class World {
             if (status == 0) {
                 dumbo.y = (int) y;
             } else if (status == 1) {
-
+                block.y = (int) y;
             }
         }
 
@@ -228,8 +247,19 @@ public class World {
             canvas.restore();
         } else if (scene.equals(Scene.SECOND)) {
 
+            canvas.drawColor(Color.BLACK);
+
             if (dumbo.x != -1 && dumbo.y != -1) {
-                canvas.drawColor(Color.BLACK);
+
+                Paint pointOfView = new Paint(Paint.ANTI_ALIAS_FLAG);
+                pointOfView.setColor(Color.RED);
+                pointOfView.setStyle(Paint.Style.FILL);
+
+
+                canvas.drawLine(dumbo.x,
+                        dumbo.y,
+                        (float) (dumbo.x + 1000 * Math.cos(Math.toRadians(dumbo.angle))),
+                        (float) (dumbo.y + 1000 * Math.sin(Math.toRadians(dumbo.angle))), pointOfView);
 
                 canvas.save();
 
@@ -241,6 +271,14 @@ public class World {
                         dumbo.y + dumbo.size / 2,
                         dumboPaint);
                 canvas.restore();
+            }
+
+            if (block.x != -1 && block.y != -1) {
+                canvas.drawRect(block.x,
+                        block.y - block.size / 2,
+                        block.x + block.size,
+                        block.y + block.size / 2,
+                        blockPaint);
             }
 
         }
