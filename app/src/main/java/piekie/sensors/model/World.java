@@ -153,17 +153,12 @@ public class World {
 
 
             canvas.rotate((float) dumbo.angle, canvas.getWidth() / 2 + dumbo.x, canvas.getHeight() / 2 + dumbo.y);
-//            Matrix matrix = new Matrix();
-//
-//            matrix.setRotate((float) dumbo.angle,
-//                    canvas.getWidth() / 2 + dumbo.x,
-//                    canvas.getHeight() / 2 + dumbo.x);
-//
-//            canvas.setMatrix(matrix);
 
-            canvas.drawRect(canvas.getWidth() / 2 + dumbo.x - dumbo.size / 2,
+            //DUMBO DRAWING
+
+            canvas.drawRect(canvas.getWidth() / 2 + dumbo.x,
                     canvas.getHeight() / 2 + dumbo.y - dumbo.size / 2,
-                    canvas.getWidth() / 2 + dumbo.x + dumbo.size / 2,
+                    canvas.getWidth() / 2 + dumbo.x + dumbo.moving.step,
                     canvas.getHeight() / 2 + dumbo.y + dumbo.size / 2,
                     dumboPaint);
             canvas.restore();
@@ -195,9 +190,9 @@ public class World {
 
             canvas.rotate((float) dumbo.angle, canvas.getWidth() / 2 + dumbo.x, canvas.getHeight() / 2 + dumbo.y);
 
-            canvas.drawRect(canvas.getWidth() / 2 + dumbo.x - dumbo.size / 2,
+            canvas.drawRect(canvas.getWidth() / 2 + dumbo.x,
                     canvas.getHeight() / 2 + dumbo.y - dumbo.size / 2,
-                    canvas.getWidth() / 2 + dumbo.x + dumbo.size / 2,
+                    canvas.getWidth() / 2 + dumbo.x + dumbo.moving.step,
                     canvas.getHeight() / 2 + dumbo.y + dumbo.size / 2,
                     dumboPaint);
             canvas.restore();

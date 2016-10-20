@@ -16,7 +16,12 @@ public final class MathUtils {
      * @return amount of corners.
      */
     public static double getAmountOfCornersInPolygon(double side, double radius) {
-        return Math.PI / Math.asin(side / 2 * radius);
+        double cosine = (2 * radius * radius - side * side)
+                / (2 * radius * radius);
+
+        double angleInDegrees = Math.toDegrees(Math.acos(cosine));
+
+        return 360 / angleInDegrees;
     }
 
     /**

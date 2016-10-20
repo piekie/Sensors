@@ -36,20 +36,21 @@ public class CircleTrajectory {
         return amountOfPoints != -1;
     }
 
-    public void initialize(double startX, double startY) {
+    public void initialize() {
         if (amountOfPoints != -1) {
             angleInside = MathUtils.getAngleInPolygon(amountOfPoints);
         }
     }
 
     public double getAngleInDegree(Point currentPosition) {
-        return Math.abs(180 - angleInside - MathUtils.getAngleBetweenPoints(currentPosition, new Point(cx, cy)));
+        return 180 - angleInside - MathUtils.getAngleBetweenPoints(currentPosition, new Point(cx, cy));
     }
 
     public void setSide(double side) {
         this.side = side;
 
         updateAmountOfPoints();
+        initialize();
     }
 
     public int getDeltaX() {

@@ -52,8 +52,6 @@ public class Brain {
                     instance.y + way * Math.sin(Math.toRadians(direction)),
                     way);
 
-            ct.initialize(instance.x, instance.y);
-
             instance.moving.setCircleTrajectory(ct);
 
             instance.moving.changeMovingWay(Moving.Way.CIRCLE);
