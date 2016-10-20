@@ -33,6 +33,10 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
         this.scene = scene;
 
         getHolder().addCallback(this);
+
+        if (scene.equals(Scene.SECOND)) {
+            this.setDrawingCacheEnabled(true);
+        }
     }
 
     public ActionView(Context context) {

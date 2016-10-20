@@ -63,7 +63,7 @@ public class World {
             block.size = res.getInteger(R.integer.default_dumbo_size);
 
             blockPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            blockPaint.setColor(Color.RED);
+            blockPaint.setColor(Color.GREEN);
             blockPaint.setStyle(Paint.Style.FILL);
         }
 
@@ -103,7 +103,7 @@ public class World {
             block.size = res.getInteger(R.integer.default_dumbo_size);
 
             blockPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            blockPaint.setColor(Color.RED);
+            blockPaint.setColor(Color.GREEN);
             blockPaint.setStyle(Paint.Style.FILL);
         }
 
@@ -120,6 +120,8 @@ public class World {
         dumbo.brain.way = info.getInt("way", res.getInteger(R.integer.default_dumbo_way));
 
         dumbo.brain.initialize();
+
+        dumbo.brain.setBlock(block);
     }
 
     public void update() {
@@ -317,7 +319,6 @@ public class World {
                         block.y + block.size / 2,
                         blockPaint);
             }
-
         }
     }
 }
