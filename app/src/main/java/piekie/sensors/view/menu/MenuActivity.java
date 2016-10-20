@@ -8,7 +8,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -58,19 +57,9 @@ public class MenuActivity extends AppCompatActivity {
         MaterialTabs tabs = (MaterialTabs) findViewById(R.id.menu_tabs);
         tabs.setViewPager(pager);
 
-        tabs.setOnTabSelectedListener(new MaterialTabs.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(int position) {
-                Log.i(TAG, "onTabSelected called with position " + position);
-            }
-        });
+        tabs.setOnTabSelectedListener(position -> Log.i(TAG, "onTabSelected called with position " + position));
 
-        tabs.setOnTabReselectedListener(new MaterialTabs.OnTabReselectedListener() {
-            @Override
-            public void onTabReselected(int position) {
-                Log.i(TAG, "onTabReselected called with position " + position);
-            }
-        });
+        tabs.setOnTabReselectedListener(position -> Log.i(TAG, "onTabReselected called with position " + position));
 
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
         pager.setPageMargin(pageMargin);

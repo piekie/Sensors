@@ -27,41 +27,34 @@ import piekie.sensors.view.action.MainActivity;
 
 public class FirstFragment extends Fragment {
 
+    static private Bundle extras;
     @InjectView(R.id.menu_seekbar_size)
     DiscreteSeekBar seekBarSize;
-
     @InjectView(R.id.menu_seekbar_angle)
     DiscreteSeekBar seekBarAngle;
-
     @InjectView(R.id.menu_switch_rotate)
     MaterialAnimatedSwitch switchRotate;
-
     @InjectView(R.id.menu_seekbar_angle_increment)
     DiscreteSeekBar seekBarAngleInc;
-
     @InjectView(R.id.menu_seekbar_step)
     DiscreteSeekBar seekBarStep;
-
     @InjectView(R.id.menu_button_start)
     Button buttonStart;
-
     @InjectView(R.id.menu_seekbar_x)
     DiscreteSeekBar seekBarX;
-
     @InjectView(R.id.menu_seekbar_y)
     DiscreteSeekBar seekBarY;
-
     @InjectView(R.id.menu_seekbar_way)
     DiscreteSeekBar seekBarWay;
-
     @InjectView(R.id.menu_seekbar_direction)
     DiscreteSeekBar seekBarDirection;
-
     @InjectView(R.id.menu_switch_way)
     MaterialAnimatedSwitch switchWay;
-
     ActionView action;
-    private Bundle extras;
+
+    public static Bundle getExtras() {
+        return extras;
+    }
 
     public static FirstFragment newInstance() {
         return new FirstFragment();

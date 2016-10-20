@@ -51,6 +51,10 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
             drawThread = new DrawThread(getHolder(), scene, intent.getBundleExtra("bundle"));
             drawThread.setRunning(true);
             drawThread.start();
+        } else if (scene.equals(Scene.SECOND)) {
+            drawThread = new DrawThread(getHolder(), scene, intent.getBundleExtra("bundle"));
+            drawThread.setRunning(true);
+            drawThread.start();
         } else {
             drawThread = new DrawThread(getHolder(), scene);
             drawThread.setRunning(true);
@@ -87,16 +91,5 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
         if (drawThread != null) {
             drawThread.push(key, value);
         }
-    }
-
-    public void resume() {
-        if (getHolder().lockCanvas(null) != null) {
-            startDrawThread(scene);
-        }
-    }
-
-    public void pause() {
-        drawThread.setRunning(false);
-        drawThread = null;
     }
 }

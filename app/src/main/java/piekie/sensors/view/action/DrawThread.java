@@ -37,6 +37,8 @@ public class DrawThread extends Thread {
             world = new World(scene);
         } else if (scene.equals(Scene.FIRST)) {
             world = new World(scene, info);
+        } else if (scene.equals(Scene.SECOND)) {
+            world = new World(scene, info);
         }
 
         prevTime = System.currentTimeMillis();

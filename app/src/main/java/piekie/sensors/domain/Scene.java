@@ -8,6 +8,7 @@ package piekie.sensors.domain;
 public enum Scene {
 
     TEST_FIRST,
-    FIRST
+    FIRST,
+    SECOND
 
 }

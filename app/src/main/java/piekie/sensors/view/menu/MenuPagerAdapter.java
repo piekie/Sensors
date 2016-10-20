@@ -5,8 +5,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import piekie.sensors.view.menu.fragment.FirstFragment;
+import piekie.sensors.view.menu.fragment.SecondFragment;
 
 /**
  * Created by piekie (Artem Vasylenko)
@@ -24,9 +26,8 @@ public class MenuPagerAdapter extends FragmentPagerAdapter {
         super(fm);
 
         mTitles = new ArrayList<>();
-        for (int i = 0; i < numberOfTabs; i++) {
-            mTitles.add(TITLES[i]);
-        }
+
+        mTitles.addAll(Arrays.asList(TITLES).subList(0, numberOfTabs));
     }
 
     @Override
@@ -36,9 +37,16 @@ public class MenuPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) return FirstFragment.newInstance();
 
-        return MenuFragment.newInstance(position);
+        switch (position) {
+            case 0:
+                return FirstFragment.newInstance();
+            case 1:
+                return SecondFragment.newInstance();
+            default:
+                return MenuFragment.newInstance(position);
+        }
+
     }
 
     @Override
