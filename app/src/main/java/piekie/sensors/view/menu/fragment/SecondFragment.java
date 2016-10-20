@@ -45,6 +45,10 @@ public class SecondFragment extends Fragment {
         actionView.setOnTouchListener((v, event) -> {
 
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (actionView.getStatus() == 0) {
+                    actionView.initDumbo(FirstFragment.getExtras());
+                }
+
                 actionView.push("touch_x", String.valueOf(event.getX()));
                 actionView.push("touch_y", String.valueOf(event.getY()));
                 actionView.push("status", "");

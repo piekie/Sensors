@@ -2,6 +2,7 @@ package piekie.sensors.view.action;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -91,5 +92,13 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
         if (drawThread != null) {
             drawThread.push(key, value);
         }
+    }
+
+    public int getStatus() {
+        return drawThread.getStatus();
+    }
+
+    public void initDumbo(Bundle b) {
+        drawThread.initDumbo(b);
     }
 }

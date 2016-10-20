@@ -88,4 +88,12 @@ public class DrawThread extends Thread {
             }
         }
     }
+
+    public int getStatus() {
+        return world.status;
+    }
+
+    void initDumbo(Bundle b) {
+        world.initDumbo(b);
+    }
 }

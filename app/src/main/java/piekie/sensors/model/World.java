@@ -17,15 +17,12 @@ import piekie.sensors.domain.Scene;
 
 public class World {
 
+    public int status;
     private Dumbo dumbo;
     private Dumbo block;
-
     private Paint dumboPaint;
     private Paint blockPaint;
-
     private Scene scene;
-
-    private int status;
 
     public World(Scene scene) {
         this.scene = scene;
@@ -47,6 +44,46 @@ public class World {
         dumboPaint.setColor(dumbo.getColor());
         dumboPaint.setStyle(Paint.Style.FILL);
 
+
+        Resources res = App.getContext().getResources();
+
+        dumbo.x = info.getInt("x", res.getInteger(R.integer.default_dumbo_x));
+        dumbo.y = info.getInt("y", res.getInteger(R.integer.default_dumbo_y));
+
+        if (scene.equals(Scene.SECOND)) {
+            dumbo.x = -1;
+            dumbo.y = -1;
+
+            status = 0;
+
+            block = new Dumbo();
+            block.x = -1;
+            block.y = -1;
+
+            block.size = res.getInteger(R.integer.default_dumbo_size);
+
+            blockPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            blockPaint.setColor(Color.RED);
+            blockPaint.setStyle(Paint.Style.FILL);
+        }
+
+        dumbo.size = info.getInt("size", res.getInteger(R.integer.default_dumbo_size));
+        dumbo.moving.step = info.getInt("step", res.getInteger(R.integer.default_dumbo_step));
+        dumbo.moving.phi = info.getInt("angleInc", res.getInteger(R.integer.default_dumbo_angle_increment));
+        dumbo.moving.isRotating = info.getBoolean("isRotating", false);
+
+        dumbo.angle = info.getInt("angle", res.getInteger(R.integer.default_dumbo_angle));
+
+
+        dumbo.brain.circle = info.getBoolean("isCircle", false);
+        dumbo.brain.direction = info.getInt("direction", res.getInteger(R.integer.default_dumbo_direction));
+        dumbo.brain.way = info.getInt("way", res.getInteger(R.integer.default_dumbo_way));
+
+        dumbo.brain.initialize();
+    }
+
+    public void initDumbo(Bundle info) {
+        this.dumbo = new Dumbo();
 
         Resources res = App.getContext().getResources();
 
