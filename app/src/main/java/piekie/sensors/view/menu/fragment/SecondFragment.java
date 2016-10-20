@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -40,6 +41,17 @@ public class SecondFragment extends Fragment {
         i.putExtra("bundle", FirstFragment.getExtras());
 
         actionView.initialize(i, Scene.SECOND);
+
+        actionView.setOnTouchListener((v, event) -> {
+
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                actionView.push("touch_x", String.valueOf(event.getX()));
+                actionView.push("touch_y", String.valueOf(event.getY()));
+                actionView.push("status", "");
+            }
+            return false;
+
+        });
 
         return root;
     }

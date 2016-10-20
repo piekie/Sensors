@@ -22,6 +22,8 @@ public class World {
 
     private Scene scene;
 
+    private int status;
+
     public World(Scene scene) {
         this.scene = scene;
         this.dumbo = new Dumbo();
@@ -47,6 +49,14 @@ public class World {
 
         dumbo.x = info.getInt("x", res.getInteger(R.integer.default_dumbo_x));
         dumbo.y = info.getInt("y", res.getInteger(R.integer.default_dumbo_y));
+
+        if (scene.equals(Scene.SECOND)) {
+            dumbo.x = -1;
+            dumbo.y = -1;
+
+            status = 0;
+        }
+
         dumbo.size = info.getInt("size", res.getInteger(R.integer.default_dumbo_size));
         dumbo.moving.step = info.getInt("step", res.getInteger(R.integer.default_dumbo_step));
         dumbo.moving.phi = info.getInt("angleInc", res.getInteger(R.integer.default_dumbo_angle_increment));
@@ -100,11 +110,31 @@ public class World {
         }
 
         if (key.equals("isCircle")) {
-            if (value.equals("true")) {
-                dumbo.brain.circle = true;
-            } else {
-                dumbo.brain.circle = false;
+            dumbo.brain.circle = value.equals("true");
+        }
+
+        if (key.equals("touch_x")) {
+            float x = Float.parseFloat(value);
+
+            if (status == 0) {
+                dumbo.x = (int) x;
+            } else if (status == 1) {
+
             }
+        }
+
+        if (key.equals("touch_y")) {
+            float y = Float.parseFloat(value);
+
+            if (status == 0) {
+                dumbo.y = (int) y;
+            } else if (status == 1) {
+
+            }
+        }
+
+        if (key.equals("status")) {
+            status += 1;
         }
 
     }
@@ -196,6 +226,23 @@ public class World {
                     canvas.getHeight() / 2 + dumbo.y + dumbo.size / 2,
                     dumboPaint);
             canvas.restore();
+        } else if (scene.equals(Scene.SECOND)) {
+
+            if (dumbo.x != -1 && dumbo.y != -1) {
+                canvas.drawColor(Color.BLACK);
+
+                canvas.save();
+
+                canvas.rotate((float) dumbo.angle, canvas.getWidth() / 2 + dumbo.x, canvas.getHeight() / 2 + dumbo.y);
+
+                canvas.drawRect(dumbo.x,
+                        dumbo.y - dumbo.size / 2,
+                        dumbo.x + dumbo.moving.step,
+                        dumbo.y + dumbo.size / 2,
+                        dumboPaint);
+                canvas.restore();
+            }
+
         }
     }
 }
