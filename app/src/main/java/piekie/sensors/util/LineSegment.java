@@ -1,8 +1,8 @@
 package piekie.sensors.util;
 
-import piekie.sensors.domain.Point;
-
 public class LineSegment {
+    public final boolean isVertical;
+    public final double slope, intercept;
     Point first;
     Point second;
     String name;
@@ -15,12 +15,44 @@ public class LineSegment {
         this.first = a;
         this.second = b;
         this.name = "LineSegment";
+
+        //set isVertical, which indicates whether this Line
+        //is vertical or not on the coordinate plane
+        if (first.x == second.x)
+            isVertical = true;
+        else
+            isVertical = false;
+
+        //set slope and intercept
+        if (!isVertical) {
+            slope = (first.y - second.y) / (first.x - second.x);
+            intercept = (second.x * first.y - first.x * second.y) / (first.x - second.x);
+        } else {
+            slope = Double.MAX_VALUE;
+            intercept = -Double.MAX_VALUE;
+        }
     }
 
     public LineSegment(Point a, Point b, String name) {
         this.first = a;
         this.second = b;
         this.name = name;
+
+        //set isVertical, which indicates whether this Line
+        //is vertical or not on the coordinate plane
+        if (first.x == second.x)
+            isVertical = true;
+        else
+            isVertical = false;
+
+        //set slope and intercept
+        if (!isVertical) {
+            slope = (first.y - second.y) / (first.x - second.x);
+            intercept = (second.x * first.y - first.x * second.y) / (first.x - second.x);
+        } else {
+            slope = Double.MAX_VALUE;
+            intercept = -Double.MAX_VALUE;
+        }
     }
 
     /**

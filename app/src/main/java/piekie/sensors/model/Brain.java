@@ -1,13 +1,12 @@
 package piekie.sensors.model;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import piekie.sensors.domain.CircleTrajectory;
-import piekie.sensors.domain.Point;
 import piekie.sensors.domain.Scene;
-import piekie.sensors.util.Geometry;
+import piekie.sensors.util.IntersectionCheceker;
 import piekie.sensors.util.LineSegment;
+import piekie.sensors.util.Point;
 
 /**
  * Created by piekie (Artem Vasylenko)
@@ -71,20 +70,22 @@ public class Brain {
                     LineSegment cd = new LineSegment(c, d);
                     LineSegment da = new LineSegment(d, a);
 
-                    if (Geometry.doLinesIntersect(base, ab)) {
-                        Log.e("GEOMETRY", "TOP");
-                        instance.setRotating(false);
-                    } else if (Geometry.doLinesIntersect(base, bc)) {
-                        Log.e("GEOMETRY", "RIGHT");
-                        instance.setRotating(false);
-                    } else if (Geometry.doLinesIntersect(base, cd)) {
-                        Log.e("GEOMETRY", "BOTTOM");
-                        instance.setRotating(false);
-                    } else if (Geometry.doLinesIntersect(base, da)) {
-                        Log.e("GEOMETRY", "LEFT");
-                        instance.setRotating(false);
-                    }
+                    IntersectionCheceker ai = new IntersectionCheceker(base, ab);
+                    IntersectionCheceker bi = new IntersectionCheceker(base, bc);
+                    IntersectionCheceker ci = new IntersectionCheceker(base, cd);
+                    IntersectionCheceker di = new IntersectionCheceker(base, da);
 
+
+                    if (ai.hasIntersection()) {
+                        instance.setRotating(false);
+                    } else if (bi.hasIntersection()) {
+                        instance.setRotating(false);
+                    } else if (ci.hasIntersection()) {
+                        instance.setRotating(false);
+                    } else if (di.hasIntersection()) {
+                        instance.setRotating(false);
+
+                    }
                 }
             }
 

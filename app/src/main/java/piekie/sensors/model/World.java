@@ -314,9 +314,9 @@ public class World {
 
             if (block.x != -1 && block.y != -1) {
                 canvas.drawRect(block.x,
-                        block.y - block.size / 2,
+                        block.y,
                         block.x + block.size,
-                        block.y + block.size / 2,
+                        block.y + block.size,
                         blockPaint);
             }
         }
