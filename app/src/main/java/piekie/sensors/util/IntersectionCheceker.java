@@ -1,5 +1,7 @@
 package piekie.sensors.util;
 
+import android.support.annotation.Nullable;
+
 /**
  * Created by piekie (Artem Vasylenko)
  * on 10/21/16
@@ -8,31 +10,21 @@ package piekie.sensors.util;
 public class IntersectionCheceker {
 
     public final LineSegment segment1, segment2;
-    private Boolean hasIntersection;
+    private Point hasIntersection;
 
     public IntersectionCheceker(LineSegment segment1, LineSegment segment2) {
         this.segment1 = segment1;
         this.segment2 = segment2;
     }
 
-    public IntersectionCheceker(double x1, double y1, double x2, double y2,
-                                double x3, double y3, double x4, double y4) {
-        Point first1 = new Point(x1, y1);
-        Point second1 = new Point(x2, y2);
-        Point first2 = new Point(x3, y3);
-        Point second2 = new Point(x4, y4);
-
-        this.segment1 = new LineSegment(first1, second1);
-        this.segment2 = new LineSegment(first2, second2);
-    }
-
-    public boolean hasIntersection() {
+    @Nullable
+    public Point hasIntersection() {
         if (hasIntersection != null)
             return hasIntersection;
 
         if (segment1.isVertical) {
             if ((segment2.first.x - segment1.first.x) * (segment2.second.x - segment1.first.x) > 0)
-                hasIntersection = false;
+                hasIntersection = null;
             else {
                 double fx_at_segment1firstx = segment1.slope * segment1.first.x + segment1.intercept;
                 double smaller, larger;
@@ -43,16 +35,19 @@ public class IntersectionCheceker {
                     larger = segment1.first.x;
                     smaller = segment1.second.x;
                 }
-                if (smaller <= fx_at_segment1firstx && fx_at_segment1firstx <= larger)
-                    hasIntersection = true;
-                else
-                    hasIntersection = false;
+                if (smaller <= fx_at_segment1firstx && fx_at_segment1firstx <= larger) {
+
+                    hasIntersection = new Point(0, 0);
+
+                } else {
+                    hasIntersection = null;
+                }
             }
         } else if (segment2.isVertical) {
             hasIntersection = new IntersectionCheceker(segment2, segment1).hasIntersection();
         } else { //both segment1 and segment2 are not vertical
             if (segment1.slope == segment2.slope)
-                hasIntersection = false;
+                hasIntersection = null;
             else {
                 double x1 = segment1.first.x;
                 double y1 = segment1.first.y;
@@ -82,10 +77,11 @@ public class IntersectionCheceker {
                     smaller2 = x4;
                     larger2 = x3;
                 }
-                if (smaller1 <= x && x <= larger1 && smaller2 <= x && x <= larger2)
-                    hasIntersection = true;
-                else
-                    hasIntersection = false;
+                if (smaller1 <= x && x <= larger1 && smaller2 <= x && x <= larger2) {
+
+                    hasIntersection = new Point(x, 0);
+                } else
+                    hasIntersection = null;
             }
         }
         return hasIntersection;

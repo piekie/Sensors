@@ -3,8 +3,8 @@ package piekie.sensors.util;
 public class LineSegment {
     public final boolean isVertical;
     public final double slope, intercept;
-    Point first;
-    Point second;
+    public Point first;
+    public Point second;
     String name;
 
     /**

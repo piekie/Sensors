@@ -2,8 +2,8 @@ package piekie.sensors.util;
 
 public class Point {
 
-    double x;
-    double y;
+    public double x;
+    public double y;
 
     /**
      * @param x the x-coordinate
