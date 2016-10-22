@@ -1,7 +1,4 @@
-package piekie.sensors.domain;
-
-import piekie.sensors.util.MathUtils;
-import piekie.sensors.util.Point;
+package piekie.sensors.util;
 
 /**
  * Created by piekie (Artem Vasylenko)

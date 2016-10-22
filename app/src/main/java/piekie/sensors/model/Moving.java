@@ -1,7 +1,7 @@
 package piekie.sensors.model;
 
-import piekie.sensors.domain.CircleTrajectory;
 import piekie.sensors.domain.Defaults;
+import piekie.sensors.util.CircleTrajectory;
 import piekie.sensors.util.Point;
 
 /**
@@ -13,6 +13,7 @@ class Moving {
 
     public int step = 100;  //шаг движения
     public int phi = 1;    // насколько Dumbo вращается. "дискрета"
+
     public boolean isRotating;   //вращается ли Дамбо
     private Way movingWay = Way.LINE;
     private CircleTrajectory circleTrajectory;

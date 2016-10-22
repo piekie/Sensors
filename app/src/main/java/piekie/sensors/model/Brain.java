@@ -1,14 +1,10 @@
 package piekie.sensors.model;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
-import piekie.sensors.App;
-import piekie.sensors.domain.CircleTrajectory;
 import piekie.sensors.domain.Scene;
+import piekie.sensors.util.CircleTrajectory;
 import piekie.sensors.util.LineSegment;
 import piekie.sensors.util.MathUtils;
 import piekie.sensors.util.Point;
@@ -58,63 +54,29 @@ public class Brain {
 
             if (scene.equals(Scene.FIRST)) {
                 instance.moving.move(direction);
+
             } else if (scene.equals(Scene.SECOND)) {
                 if (block != null && instance.moving.isRotating) {
 
-                    LineSegment base = new LineSegment(new Point(instance.x, instance.y),
-                            new Point(instance.x + 1000 * Math.cos(Math.toRadians(instance.angle)),
-                                    instance.y + 1000 * Math.sin(Math.toRadians(instance.angle))));
+                    // TODO: 10/22/16 make it more generic
 
-                    Point a = new Point(block.x, block.y);
-                    Point b = new Point(block.x + block.size, block.y);
-                    Point c = new Point(block.x + block.size, block.y + block.size);
-                    Point d = new Point(block.x, block.y + block.size);
+                    LineSegment viewRay = new LineSegment(new Point(instance.getX(), instance.getY()),
+                            new Point(instance.getX() + 1000 * Math.cos(Math.toRadians(instance.getAngle())),
+                                    instance.getY() + 1000 * Math.sin(Math.toRadians(instance.getAngle()))));
 
-                    LineSegment ab = new LineSegment(a, b);
-                    LineSegment bc = new LineSegment(b, c);
-                    LineSegment cd = new LineSegment(c, d);
-                    LineSegment da = new LineSegment(d, a);
 
-                    Point intersectionAb = MathUtils.getIntersection(base, ab);
-                    Point intersectionBc = MathUtils.getIntersection(base, bc);
-                    Point intersectionCd = MathUtils.getIntersection(base, cd);
-                    Point intersectionDa = MathUtils.getIntersection(base, da);
+                    Point intersection = MathUtils.getIntersection(block, viewRay);
 
-                    Context ctx = App.getContext();
 
-                    if (intersectionAb != null) {
+                    // TODO: 10/22/16 present coordinates of intersection not as a toast
+
+                    if (intersection != null) {
+                        Log.e("Intersection", intersection.x + " " + intersection.y);
+
                         instance.setRotating(false);
-
-                        Log.e("XXX", intersectionAb.x + " " + ab.first.y);
-
-
-                        new Handler(ctx.getMainLooper()).post(() ->
-                                Toast.makeText(ctx, intersectionAb.x + " " + ab.first.y, Toast.LENGTH_LONG).show());
-
-                    } else if (intersectionBc != null) {
-                        instance.setRotating(false);
-
-                        Log.e("XXX", intersectionBc.x + " " + bc.first.y);
-                        new Handler(ctx.getMainLooper()).post(() ->
-                                Toast.makeText(ctx, intersectionBc.x + " " + bc.first.y, Toast.LENGTH_LONG).show());
-                    } else if (intersectionCd != null) {
-                        instance.setRotating(false);
-
-                        Log.e("XXX", intersectionCd.x + " " + cd.first.y);
-                        new Handler(ctx.getMainLooper()).post(() ->
-                                Toast.makeText(ctx, intersectionCd.x + " " + cd.first.y, Toast.LENGTH_LONG).show());
-
-                    } else if (intersectionDa != null) {
-                        instance.setRotating(false);
-
-                        Log.e("XXX", intersectionDa.x + " " + da.first.y);
-                        new Handler(ctx.getMainLooper()).post(() ->
-                                Toast.makeText(ctx, intersectionDa.x + " " + da.first.y, Toast.LENGTH_LONG).show());
-
                     }
                 }
             }
-
         }
     }
 
