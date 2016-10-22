@@ -1,7 +1,7 @@
 package piekie.sensors.model;
 
 import piekie.sensors.domain.CircleTrajectory;
-import piekie.sensors.domain.Point;
+import piekie.sensors.util.Point;
 
 /**
  * Created by piekie (Artem Vasylenko)

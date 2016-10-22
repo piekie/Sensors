@@ -9,8 +9,8 @@ import android.widget.Toast;
 import piekie.sensors.App;
 import piekie.sensors.domain.CircleTrajectory;
 import piekie.sensors.domain.Scene;
-import piekie.sensors.util.IntersectionCheceker;
 import piekie.sensors.util.LineSegment;
+import piekie.sensors.util.MathUtils;
 import piekie.sensors.util.Point;
 
 /**
@@ -75,15 +75,10 @@ public class Brain {
                     LineSegment cd = new LineSegment(c, d);
                     LineSegment da = new LineSegment(d, a);
 
-                    IntersectionCheceker ai = new IntersectionCheceker(base, ab);
-                    IntersectionCheceker bi = new IntersectionCheceker(base, bc);
-                    IntersectionCheceker ci = new IntersectionCheceker(base, cd);
-                    IntersectionCheceker di = new IntersectionCheceker(base, da);
-
-                    Point intersectionAb = ai.hasIntersection();
-                    Point intersectionBc = bi.hasIntersection();
-                    Point intersectionCd = ci.hasIntersection();
-                    Point intersectionDa = di.hasIntersection();
+                    Point intersectionAb = MathUtils.getIntersection(base, ab);
+                    Point intersectionBc = MathUtils.getIntersection(base, bc);
+                    Point intersectionCd = MathUtils.getIntersection(base, cd);
+                    Point intersectionDa = MathUtils.getIntersection(base, da);
 
                     Context ctx = App.getContext();
 

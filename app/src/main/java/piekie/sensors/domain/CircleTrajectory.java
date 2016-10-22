@@ -1,6 +1,7 @@
 package piekie.sensors.domain;
 
 import piekie.sensors.util.MathUtils;
+import piekie.sensors.util.Point;
 
 /**
  * Created by piekie (Artem Vasylenko)
@@ -67,6 +68,4 @@ public class CircleTrajectory {
     private void updateAmountOfPoints() {
         amountOfPoints = (int) MathUtils.getAmountOfCornersInPolygon(side, radius);
     }
-
-
 }
