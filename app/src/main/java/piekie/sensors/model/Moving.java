@@ -1,6 +1,7 @@
 package piekie.sensors.model;
 
 import piekie.sensors.domain.CircleTrajectory;
+import piekie.sensors.domain.Defaults;
 import piekie.sensors.util.Point;
 
 /**
@@ -20,8 +21,8 @@ class Moving {
     Moving(Dumbo instance) {
         this.instance = instance;
 
-        this.instance.x = 0;
-        this.instance.y = 0;
+        this.instance.setX(Defaults.Rectangle.x);
+        this.instance.setY(Defaults.Rectangle.y);
     }
 
     /**
@@ -35,7 +36,7 @@ class Moving {
         }
 
         if (isRotating) {
-            instance.angle += delta;
+            instance.updateAngle(delta);
         }
     }
 
@@ -48,13 +49,13 @@ class Moving {
      */
     public void move(double angleInRadians) {
         if (movingWay.equals(Way.CIRCLE) && circleTrajectory.initialized()) {
-            Point currentPosition = new Point(instance.x, instance.y);
+            Point currentPosition = new Point(instance.getX(), instance.getY());
 
-            instance.x += step * Math.cos(circleTrajectory.getAngleInDegree(currentPosition));
-            instance.y += step * Math.sin(circleTrajectory.getAngleInDegree(currentPosition));
+            instance.updateX(step * Math.cos(circleTrajectory.getAngleInDegree(currentPosition)));
+            instance.updateY(step * Math.sin(circleTrajectory.getAngleInDegree(currentPosition)));
         } else {
-            instance.x += step * Math.cos(angleInRadians);
-            instance.y += step * Math.sin(angleInRadians);
+            instance.updateX(step * Math.cos(angleInRadians));
+            instance.updateY(step * Math.sin(angleInRadians));
         }
     }
 

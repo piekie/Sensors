@@ -129,6 +129,11 @@ public final class MathUtils {
         return intersection;
     }
 
+    /**
+     * @param rectangle Rectangle to detect intersection
+     * @param segment   Segment
+     * @return Point of intersection
+     */
     @Nullable
     public static Point getIntersection(Rectangle rectangle, LineSegment segment) {
         LineSegment[] segmentsToCheck = rectangle.getAllSides();

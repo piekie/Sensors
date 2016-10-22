@@ -121,8 +121,8 @@ public class Brain {
     void initialize() {
         if (circle) {
             CircleTrajectory ct = new CircleTrajectory(
-                    instance.x + way * Math.cos(Math.toRadians(direction)),
-                    instance.y + way * Math.sin(Math.toRadians(direction)),
+                    instance.getX() + way * Math.cos(Math.toRadians(direction)),
+                    instance.getY() + way * Math.sin(Math.toRadians(direction)),
                     way);
 
             instance.moving.setCircleTrajectory(ct);
