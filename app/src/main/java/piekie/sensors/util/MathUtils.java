@@ -129,4 +129,20 @@ public final class MathUtils {
         return intersection;
     }
 
+    @Nullable
+    public static Point getIntersection(Rectangle rectangle, LineSegment segment) {
+        LineSegment[] segmentsToCheck = rectangle.getAllSides();
+        Point intersection = null;
+
+        for (LineSegment s : segmentsToCheck) {
+            intersection = getIntersection(segment, s);
+
+            if (intersection != null) {
+                break;
+            }
+        }
+
+        return intersection;
+    }
+
 }
