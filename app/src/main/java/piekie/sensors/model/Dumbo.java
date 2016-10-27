@@ -3,7 +3,6 @@ package piekie.sensors.model;
 import android.graphics.Color;
 
 import piekie.sensors.domain.Defaults;
-import piekie.sensors.domain.Scene;
 import piekie.sensors.util.Rectangle;
 
 /**

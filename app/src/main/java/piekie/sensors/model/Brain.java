@@ -3,7 +3,6 @@ package piekie.sensors.model;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import piekie.sensors.domain.Scene;
 import piekie.sensors.util.CircleTrajectory;
 import piekie.sensors.util.LineSegment;
 import piekie.sensors.util.MathUtils;

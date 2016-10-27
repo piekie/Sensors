@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import piekie.sensors.R;
-import piekie.sensors.domain.Scene;
+import piekie.sensors.model.scene.SceneIdentifier;
 import piekie.sensors.view.action.ActionView;
 
 /**
@@ -40,7 +40,7 @@ public class SecondFragment extends Fragment {
         Intent i = new Intent();
         i.putExtra("bundle", FirstFragment.getExtras());
 
-        actionView.initialize(i, Scene.SECOND);
+        actionView.initialize(i, SceneIdentifier.SECOND);
 
         actionView.setOnTouchListener((v, event) -> {
 

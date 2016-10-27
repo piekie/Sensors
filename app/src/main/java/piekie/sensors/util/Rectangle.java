@@ -143,4 +143,9 @@ public class Rectangle {
         setUpperLeft(new Point(upperLeft.x, y));
         invalidate();
     }
+
+    public void setSize(double size) {
+        this.width = size;
+        this.height = size;
+    }
 }

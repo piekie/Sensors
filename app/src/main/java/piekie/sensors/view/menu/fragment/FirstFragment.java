@@ -16,7 +16,8 @@ import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import piekie.sensors.R;
-import piekie.sensors.domain.Scene;
+import piekie.sensors.model.scene.SceneIdentifier;
+import piekie.sensors.view.action.ActionController;
 import piekie.sensors.view.action.ActionView;
 import piekie.sensors.view.action.MainActivity;
 
@@ -85,154 +86,17 @@ public class FirstFragment extends Fragment {
         ViewCompat.setElevation(rootView, 50);
 
         action = (ActionView) rootView.findViewById(R.id.menu_action_example);
-        action.initialize(null, Scene.TEST_FIRST);
+        action.initialize(null, SceneIdentifier.FIRST_TEST);
 
 
-        seekBarSize.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                action.push("size", Integer.toString(value));
-
-                //// TODO: 10/4/16 move next line to "button" block
-
-                extras.putInt("size", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-            }
-        });
-
-        seekBarAngle.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                action.push("angle", Integer.toString(value));
-
-                extras.putInt("angle", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-        });
-
-        seekBarAngleInc.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                action.push("angleInc", Integer.toString(value));
-
-                extras.putInt("angleInc", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-        });
-
-        seekBarStep.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                action.push("step", Integer.toString(value));
-
-                extras.putInt("step", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-        });
-
-        seekBarX.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                extras.putInt("x", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-        });
-
-        seekBarY.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                extras.putInt("y", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-        });
-
-        seekBarWay.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                extras.putInt("way", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-        });
-
-        seekBarDirection.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
-            @Override
-            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
-                action.push("direction", Integer.toString(value));
-                extras.putInt("direction", value);
-            }
-
-            @Override
-            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
-
-            }
-        });
+        seekBarSize.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "size", extras));
+        seekBarAngle.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "angle", extras));
+        seekBarAngleInc.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "angleInc", extras));
+        seekBarStep.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "step", extras));
+        seekBarX.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "x", extras));
+        seekBarY.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "y", extras));
+        seekBarWay.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "way", extras));
+        seekBarDirection.setOnProgressChangeListener(ActionController.getOnChangeListener(action, "direction", extras));
 
         switchRotate.setOnCheckedChangeListener(b -> {
             action.push("isRotating", Boolean.toString(b));

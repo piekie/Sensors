@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import piekie.sensors.domain.Scene;
+import piekie.sensors.model.scene.SceneIdentifier;
 
 /**
  * Created by piekie (Artem Vasylenko)
@@ -18,25 +18,12 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
     private DrawThread drawThread;
     private Intent intent;
 
-    private Scene scene;
+    private SceneIdentifier scene;
 
     public ActionView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         getHolder().addCallback(this);
-    }
-
-    public ActionView(Context context, Intent intent, Scene scene) {
-        super(context);
-
-        this.intent = intent;
-        this.scene = scene;
-
-        getHolder().addCallback(this);
-
-        if (scene.equals(Scene.SECOND)) {
-            this.setDrawingCacheEnabled(true);
-        }
     }
 
     public ActionView(Context context) {
@@ -45,26 +32,17 @@ public class ActionView extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
     }
 
-    public void initialize(Intent intent, Scene scene) {
+    public void initialize(Intent intent, SceneIdentifier scene) {
         this.intent = intent;
         this.scene = scene;
     }
 
-    public void startDrawThread(Scene scene) {
-        if (scene.equals(Scene.FIRST)) {
+    public void startDrawThread(SceneIdentifier scene) {
 
-            drawThread = new DrawThread(getHolder(), scene, intent.getBundleExtra("bundle"));
-            drawThread.setRunning(true);
-            drawThread.start();
-        } else if (scene.equals(Scene.SECOND)) {
-            drawThread = new DrawThread(getHolder(), scene, intent.getBundleExtra("bundle"));
-            drawThread.setRunning(true);
-            drawThread.start();
-        } else {
-            drawThread = new DrawThread(getHolder(), scene);
-            drawThread.setRunning(true);
-            drawThread.start();
-        }
+        drawThread = new DrawThread(getHolder(), scene, intent.getBundleExtra("bundle"));
+        drawThread.setRunning(true);
+        drawThread.start();
+
     }
 
     @Override

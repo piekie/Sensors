@@ -4,8 +4,8 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 
-import piekie.sensors.domain.Scene;
 import piekie.sensors.model.World;
+import piekie.sensors.model.scene.SceneIdentifier;
 
 
 /**
@@ -14,32 +14,17 @@ import piekie.sensors.model.World;
  */
 
 public class DrawThread extends Thread {
+
     private static int MAX_FPS = 30;
     private final SurfaceHolder surfaceHolder;
     private boolean runFlag = false;
     private long prevTime;
     private World world;
 
-    public DrawThread(SurfaceHolder surfaceHolder, Scene scene) {
+    public DrawThread(SurfaceHolder surfaceHolder, SceneIdentifier scene, Bundle info) {
         this.surfaceHolder = surfaceHolder;
 
-        if (scene.equals(Scene.TEST_FIRST)) {
-            world = new World(scene);
-        }
-
-        prevTime = System.currentTimeMillis();
-    }
-
-    public DrawThread(SurfaceHolder surfaceHolder, Scene scene, Bundle info) {
-        this.surfaceHolder = surfaceHolder;
-
-        if (scene.equals(Scene.TEST_FIRST)) {
-            world = new World(scene);
-        } else if (scene.equals(Scene.FIRST)) {
-            world = new World(scene, info);
-        } else if (scene.equals(Scene.SECOND)) {
-            world = new World(scene, info);
-        }
+        world = new World(scene);
 
         prevTime = System.currentTimeMillis();
     }
@@ -87,13 +72,5 @@ public class DrawThread extends Thread {
                 }
             }
         }
-    }
-
-    public int getStatus() {
-        return world.status;
-    }
-
-    void initDumbo(Bundle b) {
-        world.initDumbo(b);
     }
 }

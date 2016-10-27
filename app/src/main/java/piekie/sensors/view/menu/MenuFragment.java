@@ -25,8 +25,6 @@ public class MenuFragment extends Fragment {
     @InjectView(R.id.textView)
     TextView mTextView;
 
-    private int position;
-
     public static MenuFragment newInstance(int position) {
         MenuFragment f = new MenuFragment();
         Bundle b = new Bundle();
@@ -38,7 +36,6 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        position = getArguments().getInt(ARG_POSITION);
     }
 
     @Override
@@ -46,7 +43,6 @@ public class MenuFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
         ButterKnife.inject(this, rootView);
         ViewCompat.setElevation(rootView, 50);
-//        mTextView.setText("Fragment #" + position);
         return rootView;
     }
 }
